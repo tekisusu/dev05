@@ -219,3 +219,5 @@ document.addEventListener('DOMContentLoaded', () => {
   changeViernesSelectEvent(tabla, database, collection);
   changeSabadoSelectEvent(tabla, database, collection);
 });
+
+console.log(database);
