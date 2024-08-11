@@ -1,5 +1,5 @@
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-import { database } from "../../environment/firebaseConfig.js";
+import { database } from "../environment/firebaseConfig.js";
 import { deleteRow } from "../modules/tabla/deleteRow.js";
 import { mostrarModal } from "../modules/mostrarModal.js";
 // import { initializeSearch } from "../../modules/searchFunction.js";
