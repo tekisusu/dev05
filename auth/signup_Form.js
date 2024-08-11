@@ -22,7 +22,7 @@ signupForm.addEventListener("submit", async (e) => {
       userId: user.uid // Guardar el UID del usuario registrado
     };
 
-    const referenciaUnidades = ref(database, 'libreria-de-conductores');
+    const referenciaUnidades = ref(database, collection);
 
     await push(referenciaUnidades, nuevoRegistro);
 
