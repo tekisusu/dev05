@@ -114,13 +114,13 @@
             <th class="text-center">#</th>
             <th class="text-center">Nombre</th>
             <th class="text-center">Semana</th>
+            <th class="text-center">Estado</th>
             <th class="text-center">Lunes</th>
             <th class="text-center">Martes</th>
             <th class="text-center">Miercoles</th>
             <th class="text-center">Jueves</th>
             <th class="text-center">Viernes</th>
             <th class="text-center">Sábado</th>
-            <th class="text-center">Estado</th>
             <th class="text-center">Rol</th>
             <th>Acciones</th>
             <th class="text-center">correo</th>
@@ -143,47 +143,30 @@
     </button>
   </section>
 
-  <!-- Register Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--=== ===== Register Modal ===== ===-->
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Formulario de Registro
-          </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Formulario de Registro</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
-          <form class="row g-3 needs-validation" id="modalForm" novalidate>
+          <form class="row g-3 needs-validation" id="registerForm" novalidate>
+
             <div class="col-md-6">
-              <label for="validationCustomNombreModal" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="validationCustomNombreModal" placeholder="Nombre" required />
+              <label for="validationNombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="validationNombre" placeholder="Nombre" required />
               <div class="invalid-feedback">Por favor, ingrese Nombre.</div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="validationCustomEmailModal" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="validationCustomEmailModal" placeholder="Correo" required
-                autocomplete="username" />
-              <div class="invalid-feedback">
-                Por favor, ingrese un correo válido.
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="validationCustomPasswordModal" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="validationCustomPasswordModal" placeholder="Contraseña"
-                required autocomplete="current-password" />
-              <div class="invalid-feedback">
-                Por favor, ingrese una contraseña.
-              </div>
             </div>
 
             <div class="col-12">
               <button class="btn btn-primary" type="submit" id="submitModalForm-btn">
-                Registrar
+                Agregar
               </button>
             </div>
+
           </form>
         </div>
       </div>

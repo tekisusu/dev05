@@ -14,7 +14,8 @@ import { changeJuevesSelectEvent } from "../modules/tabla/changeSelectEvent/chan
 import { changeViernesSelectEvent } from "../modules/tabla/changeSelectEvent/change5_ViernesSelectEvent.js";
 import { changeSabadoSelectEvent } from "../modules/tabla/changeSelectEvent/change6_SabadoSelectEvent.js";
 import "../modules/downloadToExcel.js";
-import "../auth/signup_Form.js";
+import "../modules/newRegister.js";
+// import "../auth/signup_Form.js";
 
 // Constantes y variables de estado
 const tabla = document.getElementById("libreria");
@@ -64,6 +65,18 @@ export function mostrarDatos() {
                 <option value="semana 11" ${user.semana === "semana 11" ? "selected" : ""}>semana 11</option>
                 <option value="semana 12" ${user.semana === "semana 12" ? "selected" : ""}>semana 12</option>
                 <option value="semana 13" ${user.semana === "semana 13" ? "selected" : ""}>semana 13</option>
+              </select>
+            </div>
+          </td>
+
+          <td class="text-center estado-col">
+            <div class="flex-container">
+              <span>${user.estado}</span>
+              <select class="form-select estado-select" data-id="${user.id}">
+                <option value="Ninguno" ${user.estado === "Ninguno" ? "selected" : ""}>Ninguno</option>
+                <option value="Al Día" ${user.estado === "Al Día" ? "selected" : ""}>Al Día</option>
+                <option value="Completado" ${user.estado === "Completado" ? "selected" : ""}>Completado</option>
+                <option value="Atrasado" ${user.estado === "Atrasado" ? "selected" : ""}>Atrasado</option>
               </select>
             </div>
           </td>
@@ -160,17 +173,6 @@ export function mostrarDatos() {
                 <option value="48.00" ${user.sabado === "48.00" ? "selected" : ""}>48.00</option>
                 <option value="60.00" ${user.sabado === "60.00" ? "selected" : ""}>60.00</option>
                 <option value="72.00" ${user.sabado === "72.00" ? "selected" : ""}>72.00</option>
-              </select>
-            </div>
-          </td>
-
-          <td class="text-center estado-col">
-            <div class="flex-container">
-              <span>${user.estado}</span>
-              <select class="form-select estado-select" data-id="${user.id}">
-                <option value="Ninguno" ${user.estado === "Ninguno" ? "selected" : ""}>Ninguno</option>
-                <option value="Al Día" ${user.estado === "Al Día" ? "selected" : ""}>Al Día</option>
-                <option value="Atrasado" ${user.estado === "Atrasado" ? "selected" : ""}>Atrasado</option>
               </select>
             </div>
           </td>
