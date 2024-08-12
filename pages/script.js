@@ -2,7 +2,7 @@ import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebas
 import { database } from "../environment/firebaseConfig.js";
 import { deleteRow } from "../modules/tabla/deleteRow.js";
 import { mostrarModal } from "../modules/mostrarModal.js";
-// import { initializeSearch } from "../../modules/searchFunction.js";
+import { initializeSearch } from "../modules/searchFunction.js";
 import { initScrollButtons } from "../modules/scrollButtons.js";
 import { updatePagination, currentPage, itemsPerPage } from "../modules/pagination.js";
 import { changeEstadoSelectEvent, changeRoleSelectEvent } from "../modules/tabla/changeSelectEvent.js";
@@ -207,7 +207,7 @@ export function mostrarDatos() {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('#showModalButton').addEventListener('click', mostrarModal);
   mostrarDatos();
-  // initializeSearch(tabla);
+  initializeSearch(tabla);
   initScrollButtons(tabla);
   changeRoleSelectEvent(tabla, database, collection);
   changeEstadoSelectEvent(tabla, database, collection);

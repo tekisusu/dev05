@@ -32,12 +32,12 @@
 
 <body>
   <!-- Header-Menu -->
-   <header>
-     <h2>Desarrollador</h2>
-   </header>
+  <header>
+    <h2>Desarrollador</h2>
+  </header>
 
   <!-- Sticky Form -->
-  <section class="title display-flex-center display-none">
+  <section class="title display-flex-center">
     <div class="title-container display-center">
       <!-- Pagination -->
       <div class="pagination display-flex-center">
@@ -62,7 +62,6 @@
         </select>
         <a id="scrollToTopBtn" class="bi bi-arrow-up-square btn-arrow"> </a>
       </div>
-
     </div>
   </section>
 
@@ -85,14 +84,21 @@
     </p>
   </section>
 
-
   <!-- Middle Section -->
   <section class="display-center">
     <div id="middleSection">
       <div class="display-flex-center">
         <h1>Librería de Personal</h1>
-        <ion-icon name="add-circle-outline" data-bs-toggle="modal" data-bs-target="#myModal" id="showModalButton"></ion-icon>
+        <ion-icon name="add-circle-outline" data-bs-toggle="modal" data-bs-target="#myModal"
+          id="showModalButton"></ion-icon>
       </div>
+
+      <!-- Search Function: Input + Button -->
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Buscar" id="searchInput" />
+        <button class="btn bg-green" type="button" id="searchButton">Buscar</button>
+      </div>
+
     </div>
   </section>
 
@@ -130,7 +136,7 @@
     </div>
   </main>
 
-  <!-- Download to PDF Buttons -->
+  <!--=== ===== Download to PDF Buttons ===== ===-->
   <section class="display-flex-center">
     <button class="button" id="downloadToExcel">
       <label>Descargar a Excel</label>
@@ -149,27 +155,28 @@
         </div>
         <div class="modal-body">
           <form class="row g-3 needs-validation" id="modalForm" novalidate>
-
             <div class="col-md-6">
               <label for="validationCustomNombreModal" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="validationCustomNombreModal" placeholder="Nombre" required>
-              <div class="invalid-feedback">
-                Por favor, ingrese Nombre.
-              </div>
+              <input type="text" class="form-control" id="validationCustomNombreModal" placeholder="Nombre" required />
+              <div class="invalid-feedback">Por favor, ingrese Nombre.</div>
             </div>
 
             <div class="col-md-6">
               <label for="validationCustomEmailModal" class="form-label">Correo</label>
               <input type="email" class="form-control" id="validationCustomEmailModal" placeholder="Correo" required
-                autocomplete="username">
-              <div class="invalid-feedback">Por favor, ingrese un correo válido.</div>
+                autocomplete="username" />
+              <div class="invalid-feedback">
+                Por favor, ingrese un correo válido.
+              </div>
             </div>
 
             <div class="col-md-6">
               <label for="validationCustomPasswordModal" class="form-label">Contraseña</label>
               <input type="password" class="form-control" id="validationCustomPasswordModal" placeholder="Contraseña"
-                required autocomplete="current-password">
-              <div class="invalid-feedback">Por favor, ingrese una contraseña.</div>
+                required autocomplete="current-password" />
+              <div class="invalid-feedback">
+                Por favor, ingrese una contraseña.
+              </div>
             </div>
 
             <div class="col-12">
@@ -177,7 +184,6 @@
                 Registrar
               </button>
             </div>
-
           </form>
         </div>
       </div>
@@ -187,7 +193,6 @@
   <!-- Librery to generate Excel -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx-style@0.8.13/dist/xlsx-style.min.js"></script>
-
 
   <!-- Bootstrap & Popper - Script -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

@@ -24,8 +24,8 @@ async function downloadToExcel() {
             const data = [];
             snapshot.forEach((childSnapshot) => {
                 // Filtrar las columnas que deseas incluir en el archivo Excel
-                const { unidad, placa, nombre, cedula, whatsapp, estado, role } = childSnapshot.val();
-                data.push({ unidad, placa, nombre, cedula, whatsapp, estado, role });
+                const { nombre, semana, lunes, martes, miercoles, jueves, viernes, sabado, estado } = childSnapshot.val();
+                data.push({ nombre, semana, lunes, martes, miercoles, jueves, viernes, sabado, estado });
             });
 
             // Selecciona la hoja de la plantilla donde deseas insertar los datos
@@ -52,7 +52,7 @@ async function downloadToExcel() {
             });
 
             // Actualiza el rango de la hoja
-            worksheet['!ref'] = XLSX.utils.encode_range(range.s, { c: range.e.c, r: startRow + data.length - 2 });
+            worksheet['!ref'] = XLSX.utils.encode_range(range.s, { c: range.e.c, r: startRow + data.length - 1 });
 
             // Crea un archivo Excel y lo descarga
             XLSX.writeFile(templateWorkbook, "datos.xlsx");

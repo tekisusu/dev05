@@ -11,6 +11,7 @@ export function updatePagination(totalPages, mostrarDatos) {
   prevPageBtn.disabled = currentPage === 1;
   nextPageBtn.disabled = currentPage === totalPages;
 
+  // Elimina todos los elementos de número de página excepto los botones de prev y next
   paginationContainer.querySelectorAll(".pageNumber:not(.prev-page):not(.next-page)").forEach(page => page.remove());
 
   let startPage = Math.max(1, currentPage - 1);
@@ -39,9 +40,9 @@ export function updatePagination(totalPages, mostrarDatos) {
   }
 
   prevPageBtn.removeEventListener("click", handlePrevPage);
-  prevPageBtn.addEventListener("click", handlePrevPage);
+  prevPageBtn.addEventListener("click", () => handlePrevPage(totalPages, mostrarDatos));
   nextPageBtn.removeEventListener("click", handleNextPage);
-  nextPageBtn.addEventListener("click", handleNextPage);
+  nextPageBtn.addEventListener("click", () => handleNextPage(totalPages, mostrarDatos));
 
   document.getElementById("itemsPerPageSelect").addEventListener("change", function () {
     itemsPerPage = parseInt(this.value);
@@ -51,7 +52,7 @@ export function updatePagination(totalPages, mostrarDatos) {
   });
 }
 
-function handlePrevPage() {
+function handlePrevPage(totalPages, mostrarDatos) {
   if (currentPage > 1) {
     currentPage--;
     mostrarDatos();
@@ -59,7 +60,7 @@ function handlePrevPage() {
   }
 }
 
-function handleNextPage() {
+function handleNextPage(totalPages, mostrarDatos) {
   if (currentPage < totalPages) {
     currentPage++;
     mostrarDatos();
