@@ -121,9 +121,7 @@
             <th class="text-center">Jueves</th>
             <th class="text-center">Viernes</th>
             <th class="text-center">Sábado</th>
-            <th class="text-center">Rol</th>
             <th>Acciones</th>
-            <th class="text-center">correo</th>
             <th class="text-center">userId</th>
           </tr>
         </thead>
@@ -154,19 +152,19 @@
 
         <div class="modal-body">
           <form class="row g-3 needs-validation" id="registerForm" novalidate>
+            <div class="display-flex-center">
+              <div class="col-md-6 display-flex-center">
+                <label for="validationNombre" class="form-label col-6">Nombre</label>
+                <input type="text" class="form-control" id="validationNombre" placeholder="Nombre" required />
+                <div class="invalid-feedback">Por favor, ingrese Nombre.</div>
+              </div>
 
-            <div class="col-md-6">
-              <label for="validationNombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="validationNombre" placeholder="Nombre" required />
-              <div class="invalid-feedback">Por favor, ingrese Nombre.</div>
+              <div class="col-3">
+                <button class="btn btn-primary" type="submit" id="submitModalForm-btn">
+                  Agregar
+                </button>
+              </div>
             </div>
-
-            <div class="col-12">
-              <button class="btn btn-primary" type="submit" id="submitModalForm-btn">
-                Agregar
-              </button>
-            </div>
-
           </form>
         </div>
       </div>
