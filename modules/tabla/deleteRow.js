@@ -7,7 +7,7 @@ export function deleteRow(database, collection) {
     button.addEventListener("click", function (event) {
       const id = event.currentTarget.getAttribute("data-id");
 
-      const confirmarBorrado = confirm("¿Estás seguro que deseas borrar este elemento?");
+      const confirmarBorrado = confirm("¿Estás seguro que deseas borrar esta fila?");
 
       if (confirmarBorrado) {
         remove(ref(database, `${collection}/${id}`))
