@@ -17,15 +17,15 @@ async function downloadToExcel() {
     // Verificar si el usuario confirmó la descarga
     if (confirmDownload) {
         // Cargar la plantilla de Excel
-        const templateWorkbook = await loadExcelTemplate("../../assets/excelTemplate/datos.xlsx");
+        const templateWorkbook = await loadExcelTemplate("../assets/excelTemplate/datos.xlsx");
 
         // Obtén los datos de la base de datos Firebase
         onValue(ref(database, collection), (snapshot) => {
             const data = [];
             snapshot.forEach((childSnapshot) => {
                 // Filtrar las columnas que deseas incluir en el archivo Excel
-                const { nombre, semana, lunes, martes, miercoles, jueves, viernes, sabado, estado } = childSnapshot.val();
-                data.push({ nombre, semana, lunes, martes, miercoles, jueves, viernes, sabado, estado });
+                const { nombre, semana, estado, lunes, martes, miercoles, jueves, viernes, sabado } = childSnapshot.val();
+                data.push({ nombre, semana, estado, lunes, martes, miercoles, jueves, viernes, sabado });
             });
 
             // Selecciona la hoja de la plantilla donde deseas insertar los datos

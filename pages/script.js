@@ -148,8 +148,8 @@ export function mostrarDatos() {
           </td>
 
           <td class="display-flex-center">
-            <button class="btn btn-primary edit-user-button" data-id="${user.id}"><i class="bi bi-pencil"></i></button>
-            <button class="btn btn-danger delete-user-button" data-id="${user.id}"><i class="bi bi-eraser-fill"></i></button>
+            <button class="btn btn-primary mg-05em edit-user-button" data-id="${user.id}"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mg-05em delete-user-button" data-id="${user.id}"><i class="bi bi-eraser-fill"></i></button>
           </td>
           
           <td class="text-center">
