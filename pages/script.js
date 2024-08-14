@@ -1,4 +1,4 @@
-import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 import { database } from "../environment/firebaseConfig.js";
 import { deleteRow } from "../modules/tabla/deleteRow.js";
 import { addEditEventListeners } from "../modules/tabla/editRow.js";
@@ -6,14 +6,16 @@ import { mostrarModal } from "../modules/mostrarModal.js";
 import { initializeSearch } from "../modules/searchFunction.js";
 import { initScrollButtons } from "../modules/scrollButtons.js";
 import { updatePagination, currentPage, itemsPerPage } from "../modules/pagination.js";
-import { changeEstadoSelectEvent } from "../modules/tabla/changeSelectEvent.js";
-import { changeSemanaSelectEvent } from "../modules/tabla/changeSelectEvent/changeSemanaSelectEvent.js";
-import { changeLunesSelectEvent } from "../modules/tabla/changeSelectEvent/change1_LunesSelectEvent.js";
-import { changeMartesSelectEvent } from "../modules/tabla/changeSelectEvent/change2_MartesSelectEvent.js";
-import { changeMiercolesSelectEvent } from "../modules/tabla/changeSelectEvent/change3_MiercolesSelectEvent.js";
-import { changeJuevesSelectEvent } from "../modules/tabla/changeSelectEvent/change4_JuevesSelectEvent.js";
-import { changeViernesSelectEvent } from "../modules/tabla/changeSelectEvent/change5_ViernesSelectEvent.js";
-import { changeSabadoSelectEvent } from "../modules/tabla/changeSelectEvent/change6_SabadoSelectEvent.js";
+import {
+  changeSemanaSelect,
+  changeEstadoSelect,
+  changeLunesSelectEvent,
+  changeMartesSelectEvent,
+  changeMiercolesSelectEvent,
+  changeJuevesSelectEvent,
+  changeViernesSelectEvent,
+  changeSabadoSelectEvent,
+} from "../modules/tabla/changeSelectEvent.js";
 import "../modules/downloadToExcel.js";
 import "../modules/newRegister.js";
 
@@ -46,112 +48,46 @@ export function mostrarDatos() {
         <tr>
           <td class="text-center">${filaNumero++}</td>
           <td class="text-center">${user.nombre}</td>
-
           <td class="text-center">
             <div class="flex-container">
               <span class="${!user.semana ? 'invisible-value' : ''}">${user.semana || ''}</span>
-              <select class="form-select semana-select" data-id="${user.id}">
+              <select class="form-select semana-select" data-id="${user.id}" data-field="semana">
                 <option value="---" ${user.semana === "---" ? "selected" : ""}>---</option>
-                <option value="semana 01" ${user.semana === "semana 01" ? "selected" : ""}>semana 01</option>
-                <option value="semana 02" ${user.semana === "semana 02" ? "selected" : ""}>semana 02</option>
-                <option value="semana 03" ${user.semana === "semana 03" ? "selected" : ""}>semana 03</option>
-                <option value="semana 04" ${user.semana === "semana 04" ? "selected" : ""}>semana 04</option>
-                <option value="semana 05" ${user.semana === "semana 05" ? "selected" : ""}>semana 05</option>
-                <option value="semana 06" ${user.semana === "semana 06" ? "selected" : ""}>semana 06</option>
-                <option value="semana 07" ${user.semana === "semana 07" ? "selected" : ""}>semana 07</option>
-                <option value="semana 08" ${user.semana === "semana 08" ? "selected" : ""}>semana 08</option>
-                <option value="semana 09" ${user.semana === "semana 09" ? "selected" : ""}>semana 09</option>
-                <option value="semana 10" ${user.semana === "semana 10" ? "selected" : ""}>semana 10</option>
-                <option value="semana 11" ${user.semana === "semana 11" ? "selected" : ""}>semana 11</option>
-                <option value="semana 12" ${user.semana === "semana 12" ? "selected" : ""}>semana 12</option>
-                <option value="semana 13" ${user.semana === "semana 13" ? "selected" : ""}>semana 13</option>
+                ${Array.from({ length: 13 }, (_, i) => `<option value="semana ${String(i + 1).padStart(2, '0')}" ${user.semana === `semana ${String(i + 1).padStart(2, '0')}` ? "selected" : ""}>semana ${String(i + 1).padStart(2, '0')}</option>`).join('')}
               </select>
             </div>
           </td>
-
-          <td class="text-center estado-col">
+          <td class="text-center">
             <div class="flex-container">
               <span class="${!user.estado ? 'invisible-value' : ''}">${user.estado || ''}</span>
-              <select class="form-select estado-select" data-id="${user.id}">
-                <option value="---" ${user.estado === "---" ? "selected" : ""}>---</option>
+              <select class="form-select estado-select" data-id="${user.id}" data-field="estado">
+                <option value="" ${user.estado === "" ? "selected" : ""}></option>
                 <option value="Al Día" ${user.estado === "Al Día" ? "selected" : ""}>Al Día</option>
                 <option value="Completado" ${user.estado === "Completado" ? "selected" : ""}>Completado</option>
                 <option value="Atrasado" ${user.estado === "Atrasado" ? "selected" : ""}>Atrasado</option>
               </select>
             </div>
           </td>
-
-          <td class="text-center lunes-col">
-            <div class="flex-container">
-              <span class="${!user.lunes ? 'invisible-value' : ''}">${user.lunes || ''}</span>
-              <select class="form-select lunes-select" data-id="${user.id}">
-                <option value="---" ${user.lunes === "---" ? "selected" : ""}>---</option>
-                <option value="0.00" ${user.lunes === "0.00" ? "selected" : ""}>0.00</option>
-                <option value="12.00" ${user.lunes === "12.00" ? "selected" : ""}>12.00</option>
-              </select>
-            </div>
-          </td>
-
-          <td class="text-center martes-col">
-            <div class="flex-container">
-              <span class="${!user.martes ? 'invisible-value' : ''}">${user.martes || ''}</span>
-              <select class="form-select martes-select" data-id="${user.id}">
-                <option value="---" ${user.martes === "---" ? "selected" : ""}>---</option>
-                <option value="0.00" ${user.martes === "0.00" ? "selected" : ""}>0.00</option>
-                <option value="12.00" ${user.martes === "12.00" ? "selected" : ""}>12.00</option>
-              </select>
-            </div>
-          </td>
-
-          <td class="text-center miercoles-col">
-            <div class="flex-container">
-              <span class="${!user.miercoles ? 'invisible-value' : ''}">${user.miercoles || ''}</span>
-              <select class="form-select miercoles-select" data-id="${user.id}">
-                <option value="---" ${user.miercoles === "---" ? "selected" : ""}>---</option>
-                <option value="0.00" ${user.miercoles === "0.00" ? "selected" : ""}>0.00</option>
-                <option value="12.00" ${user.miercoles === "12.00" ? "selected" : ""}>12.00</option>
-              </select>
-            </div>
-          </td>
-
-          <td class="text-center jueves-col">
-            <div class="flex-container">
-              <span class="${!user.jueves ? 'invisible-value' : ''}">${user.jueves || ''}</span>
-              <select class="form-select jueves-select" data-id="${user.id}">
-                <option value="---" ${user.jueves === "---" ? "selected" : ""}>---</option>
-                <option value="0.00" ${user.jueves === "0.00" ? "selected" : ""}>0.00</option>
-                <option value="12.00" ${user.jueves === "12.00" ? "selected" : ""}>12.00</option>
-              </select>
-            </div>
-          </td>
-
-          <td class="text-center viernes-col">
-            <div class="flex-container">
-              <span class="${!user.viernes ? 'invisible-value' : ''}">${user.viernes || ''}</span>
-              <select class="form-select viernes-select" data-id="${user.id}">
-                <option value="---" ${user.viernes === "---" ? "selected" : ""}>---</option>
-                <option value="0.00" ${user.viernes === "0.00" ? "selected" : ""}>0.00</option>
-                <option value="12.00" ${user.viernes === "12.00" ? "selected" : ""}>12.00</option>
-              </select>
-            </div>
-          </td>
-
-          <td class="text-center sabado-col">
-            <div class="flex-container">
-              <span class="${!user.sabado ? 'invisible-value' : ''}">${user.sabado || ''}</span>
-              <select class="form-select sabado-select" data-id="${user.id}">
-                <option value="---" ${user.sabado === "---" ? "selected" : ""}>---</option>
-                <option value="0.00" ${user.sabado === "0.00" ? "selected" : ""}>0.00</option>
-                <option value="12.00" ${user.sabado === "12.00" ? "selected" : ""}>12.00</option>
-              </select>
-            </div>
-          </td>
-
+          ${["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"].map((dia) => `
+            <td class="text-center">
+              <div class="flex-container">
+                <span class="${!user[dia] ? 'invisible-value' : ''}">${user[dia] || ''}</span>
+                <select class="form-select pay-select" data-id="${user.id}" data-field="${dia}">
+                  <option value="" ${user[dia] === "" ? "selected" : ""}></option>
+                  <option value="---" ${user[dia] === "---" ? "selected" : "---"}></option>
+                  <option value="12.00" ${user[dia] === "12.00" ? "selected" : ""}>12.00</option>
+                </select>
+              </div>
+            </td>
+          `).join('')}
           <td class="display-flex-center">
-            <button class="btn btn-primary mg-05em edit-user-button" data-id="${user.id}"><i class="bi bi-pencil"></i></button>
-            <button class="btn btn-danger mg-05em delete-user-button" data-id="${user.id}"><i class="bi bi-eraser-fill"></i></button>
+            <button class="btn btn-primary mg-05em edit-user-button" data-id="${user.id}">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-danger mg-05em delete-user-button" data-id="${user.id}">
+              <i class="bi bi-eraser-fill"></i>
+            </button>
           </td>
-          
           <td class="text-center">
             <span class="${!user.userId ? 'invisible-value' : ''}">${user.userId || ''}</span>
           </td>
@@ -159,6 +95,52 @@ export function mostrarDatos() {
       `;
       tabla.innerHTML += row;
     }
+
+    // Manejo de eventos para los elementos select
+    const selectElements = document.querySelectorAll("select");
+
+    selectElements.forEach((selectElement) => {
+      selectElement.addEventListener("change", function () {
+        const selectedValue = this.value;
+        const userId = this.getAttribute("data-id");
+        const field = this.getAttribute("data-field");
+
+        // Alerta de confirmación para los días de la semana
+        if (["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"].includes(field)) {
+          if (!confirm("¿Estás seguro de que deseas hacer este cambio?")) {
+            // Si el usuario cancela, revertir el valor del select
+            this.value = this.dataset.oldValue;
+            return;
+          }
+        }
+
+        // Actualizar el valor en Firebase
+        update(ref(database, `${collection}/${userId}`), {
+          [field]: selectedValue,
+        });
+
+        // Actualizar la interfaz de usuario
+        if (selectedValue === "12.00" || selectedValue === "Completado") {
+          this.disabled = true;
+          this.closest('div.flex-container').querySelector('span').style.color = "green";
+          this.closest('div.flex-container').querySelector('span').style.fontWeight = "bold";
+        } else {
+          this.disabled = false;
+          this.closest('div.flex-container').querySelector('span').style.color = "black";
+          this.closest('div.flex-container').querySelector('span').style.fontWeight = "normal";
+        }
+      });
+
+      // Configuración inicial del estilo basado en el valor seleccionado
+      const selectedValue = selectElement.value;
+      selectElement.dataset.oldValue = selectedValue; // Guardar el valor inicial
+      selectElement.disabled = selectedValue === "12.00";
+      if (selectedValue === "12.00" || selectedValue === "Completado") {
+        selectElement.closest('div.flex-container').querySelector('span').style.color = "green";
+        selectElement.closest('div.flex-container').querySelector('span').style.fontWeight = "bold";
+      }
+    });
+
     deleteRow(database, collection); // Añade event listeners para eliminación
     updatePagination(totalPages, mostrarDatos);
     addEditEventListeners(database, collection); // Añade event listeners para edición
@@ -171,8 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
   mostrarDatos();
   initializeSearch(tabla);
   initScrollButtons(tabla);
-  changeEstadoSelectEvent(tabla, database, collection);
-  changeSemanaSelectEvent(tabla, database, collection);
+  changeEstadoSelect(tabla, database, collection);
+  changeSemanaSelect(tabla, database, collection);
   changeLunesSelectEvent(tabla, database, collection);
   changeMartesSelectEvent(tabla, database, collection);
   changeMiercolesSelectEvent(tabla, database, collection);

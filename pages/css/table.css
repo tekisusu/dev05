@@ -27,9 +27,7 @@ a:hover {
     align-items: center; /* Esto ayuda a alinear los elementos verticalmente */
   }
 
-.semana-select, .estado-select, .role-select,
-.lunes-select, .martes-select, .miercoles-select,
-.jueves-select, .viernes-select, .sabado-select {
+.semana-select, .estado-select, .pay-select {
     width: 10px;
 }
 
