@@ -74,7 +74,7 @@ export function mostrarDatos() {
                 <span class="${!user[dia] ? 'invisible-value' : ''}">${user[dia] || ''}</span>
                 <select class="form-select pay-select" data-id="${user.id}" data-field="${dia}">
                   <option value="" ${user[dia] === "" ? "selected" : ""}></option>
-                  <option value="---" ${user[dia] === "---" ? "selected" : "---"}></option>
+                  <option value="0.00" ${user[dia] === "0.00" ? "selected" : "0.00"}></option>
                   <option value="12.00" ${user[dia] === "12.00" ? "selected" : ""}>12.00</option>
                 </select>
               </div>
