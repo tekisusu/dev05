@@ -26,7 +26,7 @@ export function findAndSearch(tabla) {
 
 // Función para renderizar los datos en la tabla
 function renderUsersTable(data) {
-  const tabla = document.getElementById("libreria");
+  const tabla = document.getElementById("miTabla");
   tabla.innerHTML = "";
 
   data.forEach((user, index) => {
