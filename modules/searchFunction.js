@@ -35,13 +35,13 @@ function renderUsersTable(data) {
         <td class="text-center">${index + 1}</td>
         <td class="text-center">${user.nombre}</td>
         <td class="text-center">${user.semana}</td>
+        <td class="text-center">${user.estado}</td>
         <td class="text-center">${user.lunes}</td>
         <td class="text-center">${user.martes}</td>
         <td class="text-center">${user.miercoles}</td>
         <td class="text-center">${user.jueves}</td>
         <td class="text-center">${user.viernes}</td>
         <td class="text-center">${user.sabado}</td>
-        <td class="text-center">${user.estado}</td>
         <td class="text-center">${user.role}</td>
         <td>
           <button class="btn btn-danger delete-user-button" data-id="${user.id}"><i class="bi bi-eraser-fill"></i></button>
